@@ -5,6 +5,7 @@ import com.quizapp.Quiz.Application.dao.QuizDao;
 import com.quizapp.Quiz.Application.entities.Question;
 import com.quizapp.Quiz.Application.entities.QuestionWrapper;
 import com.quizapp.Quiz.Application.entities.Quiz;
+import com.quizapp.Quiz.Application.entities.QuizSubmitRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +55,10 @@ public class QuizServiceImpl implements QuizService{
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(wrappedQuestions, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> submitQuiz(QuizSubmitRequest quizSubmitRequest) {
+        return new ResponseEntity<>("Success",HttpStatus.OK);
     }
 }
