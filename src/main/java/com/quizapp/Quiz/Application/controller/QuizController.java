@@ -30,7 +30,7 @@ public class QuizController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<String> submitQuiz(@RequestBody QuizSubmitRequest quizSubmitRequest) {
+    public ResponseEntity<Integer> submitQuiz(@RequestBody QuizSubmitRequest quizSubmitRequest) {
         return this.quizService.submitQuiz(quizSubmitRequest);
     }
 }

@@ -58,7 +58,24 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public ResponseEntity<String> submitQuiz(QuizSubmitRequest quizSubmitRequest) {
-        return new ResponseEntity<>("Success",HttpStatus.OK);
+    public ResponseEntity<Integer> submitQuiz(QuizSubmitRequest quizSubmitRequest) {
+        Optional<Quiz> quizOptional = quizDao.findById(quizSubmitRequest.getQuizId());
+
+        if (quizOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Quiz quiz = quizOptional.get();
+        int score = 0;
+
+        for(QuizSubmitRequest.UserAnswer userAnswer: quizSubmitRequest.getAnswers()){
+            for(Question question: quiz.getQuestionList()) {
+                if (question.getId() == userAnswer.getQuestionId() &&
+                        question.getRightAnswer().equalsIgnoreCase(userAnswer.getAnswer())) {
+                    score++;
+                }
+            }
+        }
+        return new ResponseEntity<>(score,HttpStatus.CREATED);
     }
 }

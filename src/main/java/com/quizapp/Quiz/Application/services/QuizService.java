@@ -16,5 +16,5 @@ public interface QuizService {
 
     ResponseEntity<List<QuestionWrapper>> getQuestionById(int id);
 
-    ResponseEntity<String> submitQuiz(QuizSubmitRequest quizSubmitRequest);
+    ResponseEntity<Integer> submitQuiz(QuizSubmitRequest quizSubmitRequest);
 }
